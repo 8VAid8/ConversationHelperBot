@@ -41,15 +41,34 @@ namespace ConversationHelperBot
             else
             {
                 List<User> users = conversationData.GetProperty<List<User>>(USERSKEY);
-                if (!users.Select(u => u.Username).Contains(username) ||
-                    !users.Select(u => u.Id).Contains(id))
+                if (!users.Select(u => u.Id).Contains(id))
                 {
                     users.Add(new User { Username = username, Id = id });
                     conversationData.SetProperty(USERSKEY, users);
                 }
             }
             await botDataStore.SaveAsync(key, BotStoreType.BotUserData, conversationData, CancellationToken.None);
-            await botDataStore.FlushAsync(key, CancellationToken.None);
+            try
+            {
+                await botDataStore.FlushAsync(key, CancellationToken.None);
+            }
+            catch(Exception ex)
+            {
+                //why?!
+            }
+            
+        }
+
+        public static async Task<bool> IsUserExists(Activity activity, string id)
+        {
+            var botDataStore = GetBotDataStore(activity);
+            var key = GetAddress(activity);
+            var conversationData = await GetConversationData(botDataStore, key);
+            List<User> users = conversationData.GetProperty<List<User>>(USERSKEY);
+            if (users != null && users.Select(u => u.Id).Contains(id))
+                return true;
+            else
+                return false;
         }
 
         public static async Task RemoveUser(Activity activity, string id)

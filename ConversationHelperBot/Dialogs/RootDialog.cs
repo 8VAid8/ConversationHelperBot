@@ -24,7 +24,8 @@ namespace ConversationHelperBot.Dialogs
             {
                 if (activity.Text == "/start")
                 {
-                    await Utils.SaveNewUser(await result as Activity);
+                    string welcomeMessage = "Add this bot to any group chat and use /all command for mentioning all users.";
+                    await context.PostAsync(welcomeMessage);
                 }
                 if (activity.Text.Contains("/all"))
                 {
@@ -34,6 +35,10 @@ namespace ConversationHelperBot.Dialogs
                 //{
 
                 //}
+                else if (!await Utils.IsUserExists(activity, activity.From.Id))
+                {
+                    await Utils.AddUser(activity, activity.From.Name, activity.From.Id);
+                }
             }
             context.Wait(MessageReceivedAsync);
         }
