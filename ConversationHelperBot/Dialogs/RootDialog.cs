@@ -20,36 +20,21 @@ namespace ConversationHelperBot.Dialogs
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
         {
             var activity = await result as Activity;
-            if (activity.Text == "/start")
+            if (!string.IsNullOrEmpty(activity.Text))
             {
-                await Utils.SaveNewUser(await result as Activity);
-            }
-            if (activity.Text.Contains("/all"))
-            {
-                //var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                // var members = await connector.Conversations.GetConversationMembersAsync(activity.Conversation.Id);
-
-                var data = await Utils.GetConversationData(activity);
-                
-                var users = data.Item1.GetProperty<List<string>>("users");
-                if (users != null)
+                if (activity.Text == "/start")
                 {
-                    StringBuilder allUsers = new StringBuilder();
-                    foreach (var user in users)
-                    {
-                        if (activity.From.Id != user)
-                            allUsers.Append($"@{user} ");
-                    }
-                    await context.PostAsync(allUsers.ToString());
-                }   
-                else
-                    await context.PostAsync("There is no any users or i'm doesn't work properly");
+                    await Utils.SaveNewUser(await result as Activity);
+                }
+                if (activity.Text.Contains("/all"))
+                {
+                    await Utils.MentionAllUsers(context);
+                }
+                //else if (activity.Text.Contains("@here"))
+                //{
 
+                //}
             }
-            //else if (activity.Text.Contains("@here"))
-            //{
-
-            //}
             context.Wait(MessageReceivedAsync);
         }
     }
