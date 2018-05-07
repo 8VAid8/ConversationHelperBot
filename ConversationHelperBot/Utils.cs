@@ -159,39 +159,5 @@ namespace ConversationHelperBot
         {
             return DialogModule.BeginLifetimeScope(Conversation.Container, activity);
         }
-
-
-
-
-
-
-
-
-
-
-        public static async Task SaveNewUser(Activity message)
-        {
-            //var data = await GetConversationData(message);
-            //var conversationData = data.Item1;
-            //var botDataStore = data.Item2;
-            //var key = data.Item3;
-            //{
-            //    if (conversationData.GetProperty<List<string>>(USERSKEY) == null)
-            //    {
-            //        conversationData.SetProperty(USERSKEY, message.MembersAdded.Select(n => n.Name).ToList());
-            //    }
-            //    else
-            //    {
-            //        List<string> users = conversationData.GetProperty<List<string>>(USERSKEY);
-            //        if (!users.Contains(message.From.Name))
-            //        {
-            //            users.Add(message.From.Name);
-            //            conversationData.SetProperty(USERSKEY, users);
-            //        }
-            //    }
-            //    await botDataStore.SaveAsync(key, BotStoreType.BotUserData, conversationData, CancellationToken.None);
-            //    await botDataStore.FlushAsync(key, CancellationToken.None);
-            //}
-        }
     }
 }
