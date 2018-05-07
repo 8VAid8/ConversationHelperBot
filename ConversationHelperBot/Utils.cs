@@ -52,9 +52,34 @@ namespace ConversationHelperBot
             await botDataStore.FlushAsync(key, CancellationToken.None);
         }
 
+        public static async Task RemoveUser(Activity activity, string id)
+        {
+            var botDataStore = GetBotDataStore(activity);
+            var key = GetAddress(activity);
+            var conversationData = await GetConversationData(botDataStore, key);
+
+            if (conversationData.GetProperty<List<User>>(USERSKEY) == null)
+                return;
+            else
+            {
+                List<User> users = conversationData.GetProperty<List<User>>(USERSKEY);
+                if (users.Select(u => u.Id).Contains(id))
+                {
+                    users.Remove(users.Where(u => u.Id == id).FirstOrDefault());
+                    conversationData.SetProperty(USERSKEY, users);
+                }
+            }
+            await botDataStore.SaveAsync(key, BotStoreType.BotUserData, conversationData, CancellationToken.None);
+            await botDataStore.FlushAsync(key, CancellationToken.None);
+        }
+
         public static async Task RemoveUsers(Activity activity)
         {
-
+            var removingUsers = activity.MembersRemoved?.ToList();
+            foreach (var user in removingUsers)
+            {
+                await RemoveUser(activity, user.Id);
+            }
         }
 
         public static async Task AddNewUsers(Activity activity)

@@ -38,9 +38,9 @@ namespace ConversationHelperBot
             }
             else if (message.Type == ActivityTypes.ConversationUpdate)
             {
-                if (message.MembersAdded.Count > 0)
+                if (message.MembersAdded?.Count > 0)
                     await Utils.AddNewUsers(message);
-                else if (message.MembersRemoved > 0)
+                else if (message.MembersRemoved?.Count > 0)
                     await Utils.RemoveUsers(message);
 
                 // Handle conversation state changes, like members being added and removed
