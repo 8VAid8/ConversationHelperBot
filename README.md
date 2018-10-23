@@ -12,7 +12,7 @@ Conversation helper bot for Telegram
 
 :hammer: fixed in 2018.1.1  
 
-## Version 2018.1.1 - 10/11/2018
+## Version 2018.1 - 10/11/2018
 
 ### [Common]
 :heavy_plus_sign: added new something  
