@@ -5,9 +5,9 @@ Conversation helper bot for Telegram
 ## Current Version - 10/12/2018
 
 ### [Part1]
-- :heavy_plus_sign: added in 2018.1.1
-- :hammer: fixed something
-- :hammer: fixed in 2018.1.1
+:heavy_plus_sign: added in 2018.1.1  
+:hammer: fixed something  
+:hammer: fixed in 2018.1.1  
 
 ## Version 2018.1.1 - 10/11/2018
 
