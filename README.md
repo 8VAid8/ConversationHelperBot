@@ -12,11 +12,11 @@ Conversation helper bot for Telegram
 ## Version 2018.1.1 - 10/11/2018
 ---------------
 ### [Common]
-:heavy_plus_sign: added new something
-:heavy_plus_sign: added again
-:heavy_plus_sign: fourth change
-:heavy_plus_sign: third change
-:heavy_plus_sign: second change
-:heavy_plus_sign: first change
-:hammer: fixed
-:bug: removed
+- :heavy_plus_sign: added new something
+- :heavy_plus_sign: added again
+- :heavy_plus_sign: fourth change
+- :heavy_plus_sign: third change
+- :heavy_plus_sign: second change
+- :heavy_plus_sign: first change
+- :hammer: fixed
+- :bug: removed
